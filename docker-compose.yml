@@ -9,6 +9,7 @@ services:
       - "502:502"
       - "8080:8080" 
     restart: unless-stopped
+    
   client:
     image: turzum/ethernetip-client:latest
     container_name: ethernetip-client
