@@ -6,7 +6,8 @@ services:
     container_name: ethernetip-server
     ports:
       - "44818:44818"
-      - "502:502"  
+      - "502:502"
+      - "8080:8080" 
     restart: unless-stopped
   client:
     image: turzum/ethernetip-client:latest
