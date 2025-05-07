@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: ./server
+    container_name: ethernetip-server
+    networks:
+      ethernet-ip-lab:
+        ipv4_address: 172.18.0.2
+    ports:
+      - "44818:44818"
+      - "502:502"  # Optional, for Modbus support
+    volumes:
+      - ./server/traffic_lights.st:/opt/openplc/webserver/st_files/traffic_lights.st
+    restart: always
+
+  client:
+    build:
+      context: ./client
+    container_name: ethernetip-client
+    networks:
+      ethernet-ip-lab:
+        ipv4_address: 172.18.0.3
+    restart: always
+
+networks:
+  ethernet-ip-lab:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.0.0/24
